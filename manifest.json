@@ -1,0 +1,50 @@
+{
+  "tools": [
+    {
+      "name": "get_employee",
+      "description": "Get details of an employee by ID",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        },
+        "required": ["id"]
+      }
+    },
+    {
+      "name": "add_employee",
+      "description": "Add a new employee",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "department": { "type": "string" },
+          "email": { "type": "string" }
+        },
+        "required": ["name", "role", "department", "email"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "employee://all",
+      "name": "All Employees",
+      "mimeType": "application/json",
+      "description": "A list of all employees in the organization"
+    }
+  ],
+  "prompts": [
+    {
+      "name": "summarize_team",
+      "description": "Generates a summary of a specific department",
+      "arguments": [
+        {
+          "name": "department",
+          "description": "The department to summarize",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

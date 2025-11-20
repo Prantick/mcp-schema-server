@@ -1,0 +1,12 @@
+{
+	"servers": {
+		"example-with-mcp-schema-server": {
+			"type": "stdio",
+			"command": "node",
+			"args": [
+				"dist/index.js"
+			]
+		}
+	},
+	"inputs": []
+}
