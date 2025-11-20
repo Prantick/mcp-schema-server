@@ -7,7 +7,7 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "mcp-schema-server": "file:../.."
+    "mcp-schema-server": "file:../../dist"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

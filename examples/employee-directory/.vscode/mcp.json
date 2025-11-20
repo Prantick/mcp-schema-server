@@ -1,0 +1,12 @@
+{
+	"servers": {
+		"example": {
+			"type": "stdio",
+			"command": "npm",
+			"args": [
+				"start"
+			]
+		}
+	},
+	"inputs": []
+}
