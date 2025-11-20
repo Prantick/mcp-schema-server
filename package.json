@@ -1,6 +1,6 @@
 {
   "name": "mcp-schema-server",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A zero-config MCP server framework that generates a fully functional Model Context Protocol server directly from a simple manifest.json schema. Define your tools, prompts, resources, and metadata once, and mcp-schema-server instantly transforms it into a ready-to-use MCP server with no manual coding required.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

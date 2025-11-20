@@ -352,5 +352,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - 📖 [Documentation](./README.md)
 - 💬 [Issues](https://github.com/yourusername/mcp-schema-server/issues)
-- 📧 Email: your-email@example.com
 
