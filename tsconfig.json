@@ -7,7 +7,6 @@
     "target": "esnext",
     "lib": ["esnext"],
     "types": ["node"],
-    // and npm install -D @types/node
 
     // Other Outputs
     "sourceMap": true,
@@ -34,5 +33,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "examples"]
 }

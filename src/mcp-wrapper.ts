@@ -1,4 +1,3 @@
-// mcp-wrapper.ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -12,19 +11,19 @@ import {
   McpError,
 } from "@modelcontextprotocol/sdk/types.js";
 import * as fs from "fs";
-import { Ajv } from "ajv"; // New: For validation
+import { Ajv } from "ajv";
 
-// Helper type for special returns (like images)
+
 export interface McpContent {
   type: "image" | "text";
-  data?: string; // for images (base64)
+  data?: string;
   mimeType?: string;
-  text?: string; // for text
+  text?: string;
 }
 
-type ActionHandler = (args: any) => Promise<any> | any;
+export type ActionHandler = (args: any) => Promise<any> | any;
 
-interface PluginConfig {
+export interface PluginConfig {
   manifestPath: string;
   name: string;
   version: string;
@@ -39,13 +38,13 @@ export class GenericMcpPlugin {
 
   constructor(config: PluginConfig) {
     this.handlers = config.handlers;
-    this.ajv = new Ajv(); // Standard JSON Schema validator
+    this.ajv = new Ajv();
 
     // Load Manifest
     const rawData = fs.readFileSync(config.manifestPath, "utf-8");
     this.manifest = JSON.parse(rawData);
 
-    // 1. STARTUP CHECK: Ensure all Manifest items have a matching Handler
+    // Ensure all Manifest items have a matching Handler
     this.validateIntegrity();
 
     this.mcpServer = new McpServer(
@@ -89,7 +88,7 @@ export class GenericMcpPlugin {
         throw new McpError(ErrorCode.MethodNotFound, `Tool ${toolName} not found`);
       }
 
-      // 2. INPUT VALIDATION: Check args against Manifest Schema
+      // Check args against Manifest Schema
       const toolDef = this.manifest.tools.find((t: any) => t.name === toolName);
       if (toolDef && toolDef.inputSchema) {
         const validate = this.ajv.compile(toolDef.inputSchema);
@@ -104,10 +103,7 @@ export class GenericMcpPlugin {
 
       try {
         const result = await handler(args);
-
-        // 3. SMART RETURN TYPES: Handle Images vs Text
         if (result && typeof result === 'object' && result.type === 'image') {
-            // User returned a special "McpContent" object for image
             return {
                 content: [{
                     type: "image",
@@ -116,8 +112,6 @@ export class GenericMcpPlugin {
                 }]
             };
         }
-
-        // Default: Treat as JSON Text
         return {
           content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
         };
