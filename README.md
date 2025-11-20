@@ -297,6 +297,14 @@ Check out the [`examples/`](./examples) directory for complete working examples:
 5. **Document your manifest** - Use clear descriptions for better LLM understanding
 6. **Handle errors gracefully** - Throw descriptive errors for better debugging
 
+
+## Adapter Pattern (Developer-friendly)
+
+Applying the Adapter Pattern reduces MCP boilerplate and makes handlers easier to write and reuse:
+
+- **Radical Simplification of Business Logic:** Keep your business functions (e.g., `getEmployee`, `addEmployee`) pure — they accept arguments and return data. This makes unit testing and reuse across other interfaces (REST, CLI) trivial.
+- **Configuration over Convention:** Move interface definitions (descriptions, schemas) into `manifest.json` so you can update what the LLM sees without changing TypeScript handlers.
+- **Solves the "Strictness" Friction:** The adapter automates MCP SDK response wrapping (the `{ content: [{ type: "text", text: ... }] }` shape), letting handlers return plain JSON for the common 95% case.
 ## TypeScript Support
 
 This package is built with TypeScript and includes full type definitions. You get:
